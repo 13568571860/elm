@@ -35,12 +35,17 @@ export default {
     if (to.name === 'home') {
       let obj = {
         name: to.params.name,
-        address: to.params.address
+        address: to.params.address,
+        latitude: to.params.latitude,
+        longitude: to.params.longitude
       }
       localStorage.address = JSON.stringify(obj)
       let his = localStorage.his
       his = his ? JSON.parse(his) : []
-      his.unshift(obj)
+      let lock = his.some(item => {
+        return item.name === obj.name
+      })
+      if (!lock) his.unshift(obj)
       localStorage.his = JSON.stringify(his)
     }
     next()

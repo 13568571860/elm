@@ -17,12 +17,26 @@ module.exports = {
         pathRewrite: {
           '^/v1': '/v1'
         }
+      },
+      '/v2': {
+        target: 'https://elm.cangdu.org',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/v2': '/v2'
+        }
+      },
+      '/shopping': {
+        target: 'https://elm.cangdu.org',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/shopping': '/shopping'
+        }
       }
     },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8081, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

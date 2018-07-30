@@ -2,7 +2,7 @@
   <div>
     <ul v-if="show" class="address">
       <li v-for="item in search" :key="item.geohash">
-        <router-link :to="'/home/' + item.name + '/' + item.address">
+        <router-link :to="'/home/' + item.name + '/' + item.address + '/' + item.latitude + '/' + item.longitude">
           <h5>{{item.name}}</h5>
           <p>{{item.address}}</p>
         </router-link>
@@ -40,6 +40,9 @@ export default {
     this.state = this.$store.state
     try {
       let his = JSON.parse(localStorage.his)
+      let date = new Date()
+      date.setDate(date.getDate() + 3)
+      document.cookie = `change_add=true;expires=${date.toUTCString()}`
       Array.prototype.push.apply(this.search, his)
       this.show = true
     } catch (err) {

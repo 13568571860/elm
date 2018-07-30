@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'homeHeader'
+  name: 'cityHeader'
 }
 </script>
 

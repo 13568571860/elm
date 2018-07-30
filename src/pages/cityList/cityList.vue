@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <home-header></home-header>
+    <city-header></city-header>
     <div class="content" ref="scroll">
       <div>
-        <home-city :axios="axios"></home-city>
+        <city-city :axios="axios"></city-city>
         <hot-city :axios="axios"></hot-city>
         <all-city :axios="axios"></all-city>
       </div>
@@ -14,15 +14,15 @@
 <script>
 import axios from 'axios'
 import Bscroll from 'better-scroll'
-import HomeHeader from './components/header'
-import HomeCity from './components/city'
+import CityHeader from './components/header'
+import CityCity from './components/city'
 import HotCity from './components/hotCity'
 import AllCity from './components/allCity'
 export default {
   name: 'home',
   components: {
-    HomeHeader,
-    HomeCity,
+    CityHeader,
+    CityCity,
     HotCity,
     AllCity
   },

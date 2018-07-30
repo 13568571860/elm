@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import CityList from 'pages/cityList/cityList'
 import City from 'pages/city/city'
+import Home from 'pages/home/home'
 
 Vue.use(Router)
 
@@ -18,9 +19,9 @@ export default new Router({
       component: City
     },
     {
-      path: '/home/:name/:address',
-      name: 'home'
-      // component: Home
+      path: '/home/:name/:address/:latitude/:longitude',
+      name: 'home',
+      component: Home
     }
   ]
 })

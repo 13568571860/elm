@@ -1,0 +1,98 @@
+<template>
+  <div class="home">
+    <home-header :axios="axios"></home-header>
+    <div class="content" ref="scroll">
+      <div>
+        <home-nav :axios="axios"></home-nav>
+        <home-nearby :axios="axios" ref="nearby" @jiazaiLoad="load"></home-nearby>
+        <div
+          class="iconfont icon-jiazai"
+          v-if="show === 'jiazai'"
+          ref="jiazai"
+        >
+        </div>
+        <div v-else-if="show === 'no'" class="notMore">没有更多了</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+import Bscroll from 'better-scroll'
+import HomeHeader from './components/header'
+import HomeNav from './components/nav'
+import HomeNearby from './components/nearby'
+export default {
+  name: 'home',
+  data () {
+    return {
+      show: ''
+    }
+  },
+  components: {
+    HomeHeader,
+    HomeNav,
+    HomeNearby
+  },
+  methods: {
+    load (isLoad) {
+      if (isLoad) {
+        this.scroll.refresh()
+        this.scroll.finishPullUp()
+        this.show = ''
+      } else {
+        this.show = 'no'
+      }
+    }
+  },
+  created () {
+    this.axios = axios
+  },
+  mounted () {
+    this.scroll = new Bscroll(this.$refs.scroll, {
+      click: true
+    })
+    this.scroll.openPullUp({
+      threshold: 200
+    })
+    this.scroll.on('pullingUp', (x) => {
+      this.show = 'jiazai'
+      this.scroll.refresh()
+      setTimeout(() => {
+        this.scroll.scrollToElement(this.$refs.jiazai)
+      }, 10)
+      this.$refs.nearby.$emit('jiazai')
+    })
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+  @import '~css/common.styl'
+  @keyframes jiazai {
+    0% {
+      transform rotate(0)
+    }
+    100% {
+      transform rotate(360deg)
+    }
+  }
+  .home
+    background-color $container
+    .content
+      overflow hidden
+      position absolute
+      top 1.29rem
+      bottom 0
+      left 0
+      right 0
+      .icon-jiazai
+        text-align center
+        font-size .8rem
+        color #999
+        animation jiazai 1s linear infinite
+      .notMore
+        text-align center
+        font-weight 400
+</style>
