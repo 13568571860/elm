@@ -43,6 +43,7 @@ export default {
     background $container
     .content
       overflow hidden
+      position  absolute
       top 1.08rem
       bottom 0
       left 0

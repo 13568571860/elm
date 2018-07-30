@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import common from 'js/common'
+import store from './store'
 import 'css/base.css'
 import 'css/iconfont.css'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -17,6 +18,7 @@ common.vp()
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>',
   render: h => h(App)
