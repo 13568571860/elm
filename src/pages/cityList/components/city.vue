@@ -20,7 +20,6 @@
 <script>
 export default {
   name: 'city',
-  props: ['axios'],
   data () {
     return {
       city: '未定位'

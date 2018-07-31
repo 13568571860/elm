@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <home-header :axios="axios"></home-header>
+    <home-header></home-header>
     <div class="content" ref="scroll">
       <div>
-        <home-nav :axios="axios"></home-nav>
-        <home-nearby :axios="axios" ref="nearby" @jiazaiLoad="load"></home-nearby>
+        <home-nav></home-nav>
+        <home-nearby ref="nearby" @jiazaiLoad="load"></home-nearby>
         <div
           class="iconfont icon-jiazai"
           v-if="show === 'jiazai'"
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Bscroll from 'better-scroll'
 import HomeHeader from './components/header'
 import HomeNav from './components/nav'
@@ -45,9 +44,6 @@ export default {
         this.show = 'no'
       }
     }
-  },
-  created () {
-    this.axios = axios
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.scroll, {
@@ -79,8 +75,8 @@ export default {
     }
   }
   .home
-    background-color $container
     .content
+      background-color $container
       overflow hidden
       position absolute
       top 1.29rem

@@ -20,9 +20,6 @@
 <script>
 export default {
   name: 'homeNav',
-  props: {
-    axios: Function
-  },
   data () {
     return {
       nav: [],
@@ -59,6 +56,7 @@ export default {
     padding .01rem 0 .37rem
     background $fff
     margin-bottom $pad
+    height 5rem
   ul
     text-align center
     li

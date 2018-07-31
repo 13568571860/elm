@@ -10,16 +10,15 @@
         {{address.name}}
       </router-link>
     </el-col>
-    <el-col :span="6">登录 | 注册</el-col>
+    <el-col :span="6" class="login">
+      <router-link to="/login">登录 | 注册</router-link>
+    </el-col>
   </el-header>
 </template>
 
 <script>
 export default {
   name: 'homeHeader',
-  props: {
-    axios: Function
-  },
   data () {
     return {
       address: {
@@ -91,13 +90,13 @@ export default {
       .iconfont
         color $fff
         font-size .56rem
+    a
+      color $fff
     .el-col:first-child
       text-align left
       padding-left $pad
     .address
       font-size .49rem
-      a
-        color $fff
     .login
-      font-size .43rem
+      text-align right
 </style>

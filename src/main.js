@@ -12,10 +12,12 @@ import 'css/iconfont.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'swiper/dist/css/swiper.css'
 import 'css/messagebox.styl'
+import axios from 'axios'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 common.vp()
+Vue.prototype.axios = axios
 Vue.use(VueAwesomeSwiper)
 
 /* eslint-disable no-new */

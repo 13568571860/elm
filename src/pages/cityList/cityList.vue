@@ -3,16 +3,15 @@
     <city-header></city-header>
     <div class="content" ref="scroll">
       <div>
-        <city-city :axios="axios"></city-city>
-        <hot-city :axios="axios"></hot-city>
-        <all-city :axios="axios"></all-city>
+        <city-city></city-city>
+        <hot-city></hot-city>
+        <all-city></all-city>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 import Bscroll from 'better-scroll'
 import CityHeader from './components/header'
 import CityCity from './components/city'
@@ -25,9 +24,6 @@ export default {
     CityCity,
     HotCity,
     AllCity
-  },
-  created () {
-    this.axios = axios
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.scroll, {

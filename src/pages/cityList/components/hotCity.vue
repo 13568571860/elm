@@ -12,9 +12,6 @@
 <script>
 export default {
   name: 'hotCity',
-  props: {
-    axios: Function
-  },
   data () {
     return {
       hotCityList: []

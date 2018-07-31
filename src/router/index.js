@@ -19,7 +19,8 @@ export default new Router({
       component: City
     },
     {
-      path: '/home/:name/:address/:latitude/:longitude',
+      path: '/',
+      alias: '/home',
       name: 'home',
       component: Home
     }

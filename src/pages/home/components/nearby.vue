@@ -60,9 +60,6 @@
 <script>
 export default {
   name: 'nearby',
-  props: {
-    axios: Function
-  },
   data () {
     return {
       page: 0,

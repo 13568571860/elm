@@ -22,9 +22,6 @@
 <script>
 export default {
   name: 'allCity',
-  props: {
-    axios: Function
-  },
   data () {
     return {
       group: {},

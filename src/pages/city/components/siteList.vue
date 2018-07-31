@@ -2,7 +2,7 @@
   <div>
     <ul v-if="show" class="address">
       <li v-for="item in search" :key="item.geohash">
-        <router-link :to="'/home/' + item.name + '/' + item.address + '/' + item.latitude + '/' + item.longitude">
+        <router-link :to="'/home?name=' + item.name + '&address=' + item.address + '&latitude=' + item.latitude + '&longitude=' + item.longitude">
           <h5>{{item.name}}</h5>
           <p>{{item.address}}</p>
         </router-link>

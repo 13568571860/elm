@@ -15,9 +15,6 @@
 <script>
 export default {
   name: 'search',
-  props: {
-    axios: Function
-  },
   data () {
     return {
       site: ''

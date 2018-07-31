@@ -1,9 +1,9 @@
 <template>
   <div class="city">
-    <city-header :axios="axios"></city-header>
+    <city-header></city-header>
     <div class="siteList" ref="scroll">
       <div>
-        <city-search :axios="axios"></city-search>
+        <city-search></city-search>
         <city-site-list></city-site-list>
       </div>
     </div>
@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Bscroll from 'better-scroll'
 import CityHeader from './components/header'
 import CitySearch from './components/search'
@@ -23,9 +22,6 @@ export default {
     CitySearch,
     CitySiteList
   },
-  created () {
-    this.axios = axios
-  },
   mounted () {
     this.scroll = new Bscroll(this.$refs.scroll, {
       click: true
@@ -34,10 +30,10 @@ export default {
   beforeRouteLeave (to, from, next) {
     if (to.name === 'home') {
       let obj = {
-        name: to.params.name,
-        address: to.params.address,
-        latitude: to.params.latitude,
-        longitude: to.params.longitude
+        name: to.query.name,
+        address: to.query.address,
+        latitude: to.query.latitude,
+        longitude: to.query.longitude
       }
       localStorage.address = JSON.stringify(obj)
       let his = localStorage.his

@@ -15,9 +15,6 @@
 <script>
 export default {
   name: 'Cityheader',
-  props: {
-    axios: Function
-  },
   data () {
     return {
       city: {
@@ -34,7 +31,6 @@ export default {
     }
   },
   created () {
-    console.log(this.$router)
     let cityId = this.$router.currentRoute.params.id
     this.axios.get('/v1/cities/' + cityId).then(this.getCity)
   }
