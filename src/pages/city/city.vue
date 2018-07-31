@@ -1,6 +1,6 @@
 <template>
   <div class="city">
-    <city-header></city-header>
+    <city-header :opction="opction"></city-header>
     <div class="siteList" ref="scroll">
       <div>
         <city-search></city-search>
@@ -12,7 +12,7 @@
 
 <script>
 import Bscroll from 'better-scroll'
-import CityHeader from './components/header'
+import CityHeader from '@/components/header'
 import CitySearch from './components/search'
 import CitySiteList from './components/siteList'
 export default {
@@ -21,6 +21,41 @@ export default {
     CityHeader,
     CitySearch,
     CitySiteList
+  },
+  data () {
+    return {
+      opction: {
+        left: {
+          icon: 'icon-jiantou4',
+          handleClick () {
+            window.history.go(-1)
+          }
+        },
+        center: {
+          text: '数据获取中...'
+        },
+        right: {
+          text: '切换城市',
+          handleClick: () => {
+            this.$router.push('/cityList')
+          },
+          css: {
+            'font-size': '.37rem',
+            'text-align': 'right',
+            'font-weight': '200'
+          }
+        }
+      }
+    }
+  },
+  methods: {
+    getCity (xhr) {
+      this.opction.center.text = xhr.data.name
+    }
+  },
+  created () {
+    let cityId = this.$router.currentRoute.params.id
+    this.axios.get('/v1/cities/' + cityId).then(this.getCity)
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.scroll, {

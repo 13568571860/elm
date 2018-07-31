@@ -37,6 +37,7 @@ export default {
     }
   },
   created () {
+    this.search.splice(0)
     this.state = this.$store.state
     try {
       let his = JSON.parse(localStorage.his)

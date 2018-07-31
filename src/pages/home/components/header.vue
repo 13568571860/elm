@@ -11,7 +11,7 @@
       </router-link>
     </el-col>
     <el-col :span="6" class="login">
-      <router-link to="/login">登录 | 注册</router-link>
+      <router-link to="/login">{{user && user.username || '登录 | 注册'}}</router-link>
     </el-col>
   </el-header>
 </template>
@@ -23,7 +23,8 @@ export default {
     return {
       address: {
         name: '北京'
-      }
+      },
+      user: localStorage.usemd5_id && JSON.parse(localStorage.usemd5_id)
     }
   },
   methods: {

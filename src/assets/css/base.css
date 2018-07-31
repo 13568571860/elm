@@ -57,3 +57,32 @@ html,body{
 .clearfix:after {
 	clear:both;
 }
+.icon-jiazai {
+  text-align: center;
+  font-size: .8rem!important;
+  color: #999;
+	animation: jiazai 1s linear infinite;
+}
+@keyframes jiazai {
+	0% {
+		transform: rotate(0)
+	}
+	100% {
+		transform: rotate(360deg)
+	}
+}
+.el-icon-loading {
+	font-size:	.64rem;
+}
+.el-loading-text {
+	font-size:	.43rem!important;
+}
+.el-icon-warning.el-message-box__status {
+	display: block;
+	font-size: .64rem!important;
+}
+.el-message-box__message p {
+	text-align: center!important;
+	font-size: .5rem!important;
+	line-height: .9rem!important;
+}
