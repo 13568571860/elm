@@ -6,6 +6,7 @@ import router from './router'
 import ElementUI from 'element-ui'
 import common from 'js/common'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import Bscroll from 'better-scroll'
 import store from './store'
 import 'css/base.css'
 import 'css/iconfont.css'
@@ -13,11 +14,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'swiper/dist/css/swiper.css'
 import 'css/messagebox.styl'
 import axios from 'axios'
+import './filter/filter'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 common.vp()
 Vue.prototype.axios = axios
+Vue.prototype.Bscroll = Bscroll
 Vue.use(VueAwesomeSwiper)
 
 /* eslint-disable no-new */

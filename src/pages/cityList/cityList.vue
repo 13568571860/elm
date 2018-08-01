@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import Bscroll from 'better-scroll'
 import CityHeader from '@/components/header'
 import CityCity from './components/city'
 import HotCity from './components/hotCity'
@@ -54,7 +53,7 @@ export default {
     this.headerOpc.right.text = localStorage.usemd5_id ? JSON.parse(localStorage.usemd5_id).username : '登录 | 注册'
   },
   mounted () {
-    this.scroll = new Bscroll(this.$refs.scroll, {
+    this.scroll = new this.Bscroll(this.$refs.scroll, {
       click: true
     })
   }

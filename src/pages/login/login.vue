@@ -15,8 +15,8 @@ export default {
       headerOpc: {
         left: {
           icon: 'icon-jiantou4',
-          handleClick () {
-            window.history.go(-1)
+          handleClick: () => {
+            this.$router.go(-1)
           }
         },
         center: {

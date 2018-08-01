@@ -6,52 +6,54 @@
     </p>
     <ul v-if="shopping.length">
       <el-row tag="li" v-for="item in shopping" :key="item.id + Math.random()">
-        <el-col :span="5" class="img">
-          <div :style="{'background-image': `url(https://elm.cangdu.org/img/${item.image_path})`}"></div>
-        </el-col>
-        <el-col :span="19" class="main">
-          <el-row class="top">
-            <el-col class="title" :span="16">
-              <i>品牌</i>
-              <span>{{item.name}}</span>
-            </el-col>
-            <el-col :span="8" class="serve">
-              <span v-for="supports in item.supports" :key="supports._id">{{supports.icon_name}}</span>
-            </el-col>
-          </el-row>
-          <el-row class="cen">
-            <el-col class="salesVolume clearfix" :span="18">
-              <el-rate
-                v-model="item.rating"
-                disabled
-                show-score
-                :span="10"
-                text-color="#ff9900"
-                score-template="{value}">
-              </el-rate>
-              <el-col class="num" :span="14">月售{{item.recent_order_num}}单</el-col>
-            </el-col>
-            <el-col :span="6">
-              <span
-                v-if="item.delivery_mode"
-                class="feng"
-                :style="{
-                  backgroundColor: '#' + item.delivery_mode.color,
-                  color: '#fff'
-                }"
-              >
-                {{item.delivery_mode.text}}
-              </span>
-              <span class="zs">准时送</span>
-            </el-col>
-          </el-row>
-          <el-row class="bot">
-            <el-col :span="12">￥{{item.float_minimum_order_amount}}起送 / {{item.piecewise_agent_fee.tips}}</el-col>
-            <el-col :span="12" class="time">{{item.distance}} /
-              <span> {{item.order_lead_time}}</span>
-            </el-col>
-          </el-row>
-        </el-col>
+        <router-link :to="'/item/' + item.id">
+          <el-col :span="5" class="img">
+            <div :style="{'background-image': `url(https://elm.cangdu.org/img/${item.image_path})`}"></div>
+          </el-col>
+          <el-col :span="19" class="main">
+            <el-row class="top">
+              <el-col class="title" :span="16">
+                <i>品牌</i>
+                <span>{{item.name}}</span>
+              </el-col>
+              <el-col :span="8" class="serve">
+                <span v-for="supports in item.supports" :key="supports._id">{{supports.icon_name}}</span>
+              </el-col>
+            </el-row>
+            <el-row class="cen">
+              <el-col class="salesVolume clearfix" :span="18">
+                <el-rate
+                  v-model="item.rating"
+                  disabled
+                  show-score
+                  :span="10"
+                  text-color="#ff9900"
+                  score-template="{value}">
+                </el-rate>
+                <el-col class="num" :span="14">月售{{item.recent_order_num}}单</el-col>
+              </el-col>
+              <el-col :span="6">
+                <span
+                  v-if="item.delivery_mode"
+                  class="feng"
+                  :style="{
+                    backgroundColor: '#' + item.delivery_mode.color,
+                    color: '#fff'
+                  }"
+                >
+                  {{item.delivery_mode.text}}
+                </span>
+                <span class="zs">准时送</span>
+              </el-col>
+            </el-row>
+            <el-row class="bot">
+              <el-col :span="12">￥{{item.float_minimum_order_amount}}起送 / {{item.piecewise_agent_fee.tips}}</el-col>
+              <el-col :span="12" class="time">{{item.distance}} /
+                <span> {{item.order_lead_time}}</span>
+              </el-col>
+            </el-row>
+          </el-col>
+        </router-link>
       </el-row>
     </ul>
   </div>
@@ -63,7 +65,8 @@ export default {
   data () {
     return {
       page: 0,
-      shopping: []
+      shopping: [],
+      initAddress: JSON.parse(localStorage.address)
     }
   },
   methods: {
@@ -102,7 +105,7 @@ export default {
     this.$on('jiazai', () => {
       this.handleJiazai()
     })
-    this.axios.get(`/shopping/restaurants?latitude=${this.address.latitude}&longitude=${this.address.longitude}&offset=${this.page}`).then(this.getShopping)
+    this.axios.get(`/shopping/restaurants?latitude=${this.initAddress.latitude}&longitude=${this.initAddress.longitude}&offset=${this.page}`).then(this.getShopping)
   }
 }
 </script>

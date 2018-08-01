@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import Bscroll from 'better-scroll'
 import HomeHeader from './components/header'
 import HomeNav from './components/nav'
 import HomeNearby from './components/nearby'
@@ -46,7 +45,7 @@ export default {
     }
   },
   mounted () {
-    this.scroll = new Bscroll(this.$refs.scroll, {
+    this.scroll = new this.Bscroll(this.$refs.scroll, {
       click: true
     })
     this.scroll.openPullUp({

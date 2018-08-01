@@ -4,6 +4,7 @@ import CityList from 'pages/cityList/cityList'
 import City from 'pages/city/city'
 import Home from 'pages/home/home'
 import Login from 'pages/login/login'
+import Item from 'pages/item/item'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/item/:shopId',
+      name: 'item',
+      component: Item
     }
   ]
 })

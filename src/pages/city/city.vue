@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import Bscroll from 'better-scroll'
 import CityHeader from '@/components/header'
 import CitySearch from './components/search'
 import CitySiteList from './components/siteList'
@@ -27,8 +26,8 @@ export default {
       opction: {
         left: {
           icon: 'icon-jiantou4',
-          handleClick () {
-            window.history.go(-1)
+          handleClick: () => {
+            this.$router.go(-1)
           }
         },
         center: {
@@ -58,7 +57,7 @@ export default {
     this.axios.get('/v1/cities/' + cityId).then(this.getCity)
   },
   mounted () {
-    this.scroll = new Bscroll(this.$refs.scroll, {
+    this.scroll = new this.Bscroll(this.$refs.scroll, {
       click: true
     })
   },
