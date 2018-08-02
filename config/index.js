@@ -26,10 +26,24 @@ module.exports = {
         }
       },
       '/shopping': {
-        target: 'https://elm.cangdu.org',
+        target: 'https://www.ele.me/restapi',
         changeOrigin: true,
         pathRewrite: {
           '^/shopping': '/shopping'
+        }
+      },
+      '/v3': {
+        target: 'https://h5.ele.me/restapi/ugc',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/v3': '/v3'
+        }
+      },
+      '/dist': {
+        target: 'https://www.ele.me/restapi/ugc',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/dist': '/v1'
         }
       }
     },

@@ -8,8 +8,8 @@
           v-for="item in list"
           :key="item.id"
         >
-          <img :src="'https://fuss10.elemecdn.com/' + item.image_url" alt="">
-          <p>{{item.title}}</p>
+          <img :src="item.image_hash | img_home" alt="">
+          <p>{{item.name}}</p>
         </el-col>
       </ul>
     </swiper-slide>
@@ -31,15 +31,17 @@ export default {
   },
   methods: {
     home_nav (xhr) {
-      let len = xhr.data.length
+      let len = xhr.data[1].entries.length
       for (let i = 0; i < len; i++) {
         if (i % 8 === 0) this.nav.push([])
-        this.nav[this.nav.length - 1].push(xhr.data[i])
+        this.nav[this.nav.length - 1].push(xhr.data[1].entries[i])
       }
+      console.log(this.nav)
     }
   },
   created () {
-    this.axios.get('/v2/index_entry').then(this.home_nav)
+    let initAddress = JSON.parse(localStorage.address)
+    this.axios.get(`/shopping/openapi/entries?templates[]=main_template&templates[]=favourable_template&templates[]=svip_template&terminal=h5&latitude=${initAddress.latitude}&longitude=${initAddress.longitude}`).then(this.home_nav)
   }
 }
 </script>

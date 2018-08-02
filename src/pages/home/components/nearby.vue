@@ -8,7 +8,7 @@
       <el-row tag="li" v-for="item in shopping" :key="item.id + Math.random()">
         <router-link :to="'/item/' + item.id">
           <el-col :span="5" class="img">
-            <div :style="{'background-image': `url(https://elm.cangdu.org/img/${item.image_path})`}"></div>
+            <img :src="item.image_path | img_home">
           </el-col>
           <el-col :span="19" class="main">
             <el-row class="top">
@@ -48,8 +48,8 @@
             </el-row>
             <el-row class="bot">
               <el-col :span="12">￥{{item.float_minimum_order_amount}}起送 / {{item.piecewise_agent_fee.tips}}</el-col>
-              <el-col :span="12" class="time">{{item.distance}} /
-                <span> {{item.order_lead_time}}</span>
+              <el-col :span="12" class="time">{{item.distance}}米 /
+                <span> {{item.order_lead_time}}分钟</span>
               </el-col>
             </el-row>
           </el-col>
@@ -75,7 +75,7 @@ export default {
       this.page = Math.ceil(this.shopping.length / 20)
     },
     getProduct (callback) {
-      this.axios.get(`/shopping/restaurants?latitude=${this.address.latitude}&longitude=${this.address.longitude}&offset=${this.page * 20}`).then(callback)
+      this.axios.get(`/shopping/restaurants?extras[]=activities&geohash=ws10hpfzgd65&latitude=${this.address.latitude}&longitude=${this.address.longitude}&offset=${this.page * 20}&limit=20&terminal=web`).then(callback)
     },
     handleJiazai () {
       this.getProduct(this.pushProduct)
@@ -105,7 +105,7 @@ export default {
     this.$on('jiazai', () => {
       this.handleJiazai()
     })
-    this.axios.get(`/shopping/restaurants?latitude=${this.initAddress.latitude}&longitude=${this.initAddress.longitude}&offset=${this.page}`).then(this.getShopping)
+    this.axios.get(`/shopping/restaurants?extras[]=activities&geohash=ws10hpfzgd65&latitude=${this.initAddress.latitude}&longitude=${this.initAddress.longitude}&offset=${this.page * 20}&limit=20&terminal=web`).then(this.getShopping)
   }
 }
 </script>

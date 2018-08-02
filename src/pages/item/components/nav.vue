@@ -1,10 +1,10 @@
 <template>
   <el-row>
     <el-col :span="12">
-      <span :class="{active: isActive}" @click="handleclick1">商品</span>
+      <span :class="{active: switchCon}" @click="handleclick1">商品</span>
     </el-col>
     <el-col :span="12">
-      <span :class="{active: !isActive}" @click="handleclick2">评价</span>
+      <span :class="{active: !switchCon}" @click="handleclick2">评价</span>
     </el-col>
   </el-row>
 </template>
@@ -12,17 +12,17 @@
 <script>
 export default {
   name: 'itemNav',
-  data () {
-    return {
-      isActive: true
+  computed: {
+    switchCon () {
+      return this.$store.state.switchCon
     }
   },
   methods: {
     handleclick1 () {
-      this.isActive = true
+      this.$store.commit('switchCon', true)
     },
     handleclick2 () {
-      this.isActive = false
+      this.$store.commit('switchCon', false)
     }
   }
 }

@@ -10,7 +10,11 @@ export default new Vuex.Store({
     floor: 0,
     floors: 0,
     buyCar: {},
-    specs: {}
+    specs: {},
+    lock: false,
+    restaurant: {},
+    evalLoad: '',
+    switchCon: true
   },
   actions: {
     searchCity (ctx, search) {
@@ -30,6 +34,9 @@ export default new Vuex.Store({
     },
     showSpecs (ctx, specs) {
       ctx.commit('showSpecs', specs)
+    },
+    upTopCar (ctx, lock) {
+      ctx.commit('upTopCar', lock)
     }
   },
   mutations: {
@@ -50,6 +57,18 @@ export default new Vuex.Store({
     },
     showSpecs (state, specs) {
       state.specs = specs
+    },
+    upTopCar (state, lock) {
+      state.lock = lock
+    },
+    restaurant (state, restaurant) {
+      state.restaurant = restaurant
+    },
+    evalLoad (state, load) {
+      state.evalLoad = load
+    },
+    switchCon (state, switchCon) {
+      state.switchCon = switchCon
     }
   }
 })

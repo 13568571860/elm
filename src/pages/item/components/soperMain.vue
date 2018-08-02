@@ -13,7 +13,7 @@
           @click.native="handlePushCar(item, $event)"
         >
           <el-col class="img" :span="5">
-            <img src="http://fuss10.elemecdn.com/4/6f/c302c0c8ee37a4de58ef6393e5c7ajpeg.jpeg?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/" alt="">
+            <img :src="item.image_path | img_home" alt="">
           </el-col>
           <el-col class="itemMain" :span="19">
             <p class="title">{{item.name}}</p>
@@ -25,7 +25,7 @@
             <el-row class="price">
               <el-col class="ict" v-if="item.specfoods" :span="15">
                 <i class="ic">￥</i>
-                <span class="num">{{item.specfoods[0].price}}</span>
+                <span class="num">{{item.specfoods[0].price.toFixed(2)}}</span>
                 <i class="gui" v-if="item.specfoods.length > 1">起</i>
               </el-col>
               <el-col
@@ -43,7 +43,12 @@
               >
                 {{totalRes(item.specfoods)}}
               </el-col>
-              <el-col tag="span" class="iconfont icon-jia" :class="[item.specfoods.length == 1 ? 'pay' : 'pays']" :span="3"></el-col>
+              <el-col
+                tag="span"
+                class="iconfont icon-jia"
+                :class="[item.specfoods.length == 1 ? 'pay' : 'pays']"
+                :span="3">
+              </el-col>
             </el-row>
           </el-col>
           <span
@@ -99,6 +104,7 @@ export default {
           if (scroll.y > item) {
             if (this.floor !== idx - 1) {
               this.floor = idx - 1
+              this.floor = this.floor >= 0 ? this.floor : 0
               this.toActive()
             }
             return true
@@ -124,7 +130,7 @@ export default {
           this.handlePay(item)
           break
         case e.target.classList.contains('nopay'):
-          this.handleNoPays(item)
+          this.handleNoPay(item)
           break
         case e.target.classList.contains('multiple'):
           this.multiple(item, e)
@@ -141,13 +147,32 @@ export default {
         this.isShownulCar = false
       }, 2000)
     },
-    handleNoPays (item) {
+    handleNoPay (item) {
+      this.buyCar = this.buyCars
       if (this.buyCar[item.specfoods[0].food_id] && this.buyCar[item.specfoods[0].food_id].quantity > 1) {
         this.buyCar[item.specfoods[0].food_id].quantity--
       } else {
         delete this.buyCar[item.specfoods[0].food_id]
       }
       this.toLocal()
+    },
+    handleNoPays (item) {
+      this.buyCar = this.buyCars
+      let arr = []
+      item.specfoods.forEach(it => {
+        arr.push(it.food_id)
+      })
+      arr.some(it => {
+        if (this.buyCar[it]) {
+          if (this.buyCar[it].quantity > 1) {
+            this.buyCar[it].quantity--
+          } else {
+            delete this.buyCar[it]
+          }
+          this.toLocal()
+          return true
+        }
+      })
     },
     handlePays (item) {
       item = Object.assign({}, item)
@@ -263,10 +288,12 @@ export default {
           font-size .44rem
           line-height .61rem
           margin-bottom .12rem
+          nowrap()
         .alias
           font-size .32rem
           line-height .37rem
           color #999
+          nowrap()
         .month_sales
           font-size .32rem
           line-height .49rem
@@ -325,7 +352,7 @@ export default {
         .multiple:before
           color #cccccc
           border-color #ccc
-      .if07373
+      .iec9c68
         color #f07373
         position absolute
         right .27rem

@@ -16,20 +16,21 @@
       <el-radio-group
         v-model="foods_id"
         size="medium"
-        @change="handleValue">
+        @change="handleValue"
+      >
         <el-radio-button
           v-for="res in specs.specfoods"
           :key="res.food_id"
           :label="res.food_id"
         >
-          {{res.specs_name}}
+          {{res.specs[0].value}}
         </el-radio-button>
       </el-radio-group>
     </div>
     <div slot="footer" class="boxFooter">
       <el-col :span="12">
         <span class="money">￥</span>
-        <span class="prices">{{foodPrice}}</span>
+        <span class="prices">{{foodPrice && foodPrice.toFixed(2)}}</span>
       </el-col>
       <el-button :span="12" type="primary" @click="paysCar">加入购物车</el-button>
     </div>
@@ -100,7 +101,7 @@ export default {
         quantity: 1,
         sku_id: item.sku_id,
         stock: item.stock,
-        specs: [item.specs_name]
+        specs: [item.specs[0].value]
       }
     },
     toLocal (buyCar) {

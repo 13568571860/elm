@@ -2,7 +2,11 @@
   <div class="car">
     <el-col :span="6" class="icon_car">
       <p>
-        <span class="iconfont icon-gouwucheman" :class="{icon_color: icon_color}">
+        <span
+          class="iconfont icon-gouwucheman"
+          :class="{icon_color: icon_color}"
+          @click="click(icon_color)"
+        >
           <i v-show="totleNum">{{totleNum}}</i>
         </span>
       </p>
@@ -22,38 +26,55 @@ export default {
     return {
       icon_color: false,
       totle: 0,
-      distribution: '配送费5元',
       spread: '还差20元起送',
       totleNum: 0
     }
   },
-  methods: {
-    initBuyCar (buyCar) {
-      this.icon_color = false
-      this.totle = 0
-      this.totleNum = 0
-      let vie = 20
-      for (let key in buyCar) {
-        this.icon_color = true
-        this.totle += buyCar[key].price * buyCar[key].quantity
-        this.distribution = `配送费${buyCar[key].packing_fee}元`
-        this.totleNum += buyCar[key].quantity
-        vie -= buyCar[key].price * buyCar[key].quantity
-      }
-      if (vie > 0) {
-        this.spread = `还差${vie}元起送`
-      } else {
-        this.spread = '去结算'
-      }
-    }
-  },
   computed: {
+    restaurant () {
+      return this.$store.state.restaurant
+    },
+    distribution () {
+      return this.restaurant.piecewise_agent_fee && this.restaurant.piecewise_agent_fee.description
+    },
+    resu () {
+      return this.restaurant && this.restaurant.float_minimum_order_amount
+    },
     buyCar () {
       return this.$store.state.buyCar
     }
   },
+  methods: {
+    initBuyCar (buyCar) {
+      let resu = this.resu
+      this.icon_color = false
+      this.totle = 0
+      this.totleNum = 0
+      for (let key in buyCar) {
+        this.icon_color = true
+        this.totle += buyCar[key].price * buyCar[key].quantity
+        this.totleNum += buyCar[key].quantity
+        resu -= buyCar[key].price * buyCar[key].quantity
+      }
+      if (resu > 0) {
+        this.spread = `还差${resu}元起送`
+      } else if (this.totleNum > 0 && resu <= 0) {
+        this.spread = '去结算'
+      } else {
+        this.spread = `还差0元起送`
+      }
+    },
+    click (lock) {
+      if (lock) {
+        this.$store.dispatch('upTopCar', !this.$store.state.lock)
+      }
+    }
+  },
   watch: {
     buyCar () {
+      this.initBuyCar(this.buyCar)
+    },
+    restaurant () {
       this.initBuyCar(this.buyCar)
     }
   },
@@ -72,6 +93,7 @@ export default {
     height 1.27rem
     background-color #3d3d3f
     width 100%
+    z-index 1000
     .icon_car
       text-align center
       p

@@ -3,11 +3,14 @@
     <item-header :item="headerItem"></item-header>
     <item-nav></item-nav>
     <div class="soperItem">
-      <item-soper></item-soper>
+      <transition name="el-fade-in">
+        <component :is="isShow ? 'item-soper' : 'item-evaluate'"></component>
+      </transition>
     </div>
     <item-car></item-car>
     <item-message-box></item-message-box>
     <item-car-item></item-car-item>
+    <item-shade></item-shade>
   </div>
 </template>
 
@@ -15,37 +18,42 @@
 import ItemHeader from './components/header'
 import ItemNav from './components/nav'
 import ItemSoper from './components/soper'
+import ItemEvaluate from './components/evaluate'
 import ItemCar from './components/car'
 import ItemMessageBox from './components/message'
 import ItemCarItem from './components/carItem'
+import ItemShade from './components/shade'
 export default {
   name: 'item',
   components: {
     ItemHeader,
     ItemNav,
     ItemSoper,
+    ItemEvaluate,
     ItemCar,
     ItemMessageBox,
-    ItemCarItem
+    ItemCarItem,
+    ItemShade
   },
   data () {
     return {
       headerItem: {}
     }
   },
+  computed: {
+    isShow () {
+      return this.$store.state.switchCon
+    }
+  },
   methods: {
     getMerchant (xhr) {
       this.headerItem = xhr.data
+      this.$store.commit('restaurant', xhr.data)
     }
   },
   created () {
     let shopId = this.$router.currentRoute.params.shopId
     this.axios.get('/shopping/restaurant/' + shopId).then(this.getMerchant)
-  },
-  beforeRouteLeave (to, from, next) {
-    let buyCar = this.$store.state.buyCar
-    localStorage.buyCar = JSON.stringify(buyCar)
-    next()
   }
 }
 </script>

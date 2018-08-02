@@ -27,7 +27,7 @@ export default {
   },
   created () {
     let shopId = this.$router.currentRoute.params.shopId
-    this.axios.get(`/shopping/v2/menu?restaurant_id=${shopId}`).then(this.getMenu)
+    this.axios.get(`/shopping/v2/menu?terminal=web&restaurant_id=${shopId}`).then(this.getMenu)
   }
 }
 </script>
