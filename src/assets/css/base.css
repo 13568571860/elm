@@ -92,3 +92,7 @@ html,body{
 	border: 1px solid #dcdfe6!important;
 	border-radius: .08rem!important;
 }
+html,
+body {
+	height: 100%
+}

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ export default new Vuex.Store({
     restaurant: {},
     evalLoad: '',
     switchCon: true,
-    commodity: {}
+    commodity: {},
+    search: []
   },
   actions: {
     searchCity (ctx, search) {
@@ -38,6 +40,15 @@ export default new Vuex.Store({
     },
     upTopCar (ctx, lock) {
       ctx.commit('upTopCar', lock)
+    },
+    search (ctx, opction) {
+      let address = JSON.parse(localStorage.address)
+      axios.get(`/shopping/v2/restaurants/search?extras[]=activities&extras[]=coupon&terminal=h5&is_rewrite=1&search_item_type=3&limit=15&keyword=${opction.search_text}&offset=${opction.offset}&latitude=${address.latitude}&longitude=${address.longitude}`).then((xhr) => {
+        ctx.commit('search', {
+          data: xhr.data,
+          reset: opction.offset === 0
+        })
+      })
     }
   },
   mutations: {
@@ -73,6 +84,16 @@ export default new Vuex.Store({
     },
     commodity (state, commodity) {
       state.commodity = commodity
+    },
+    search (state, opction) {
+      if (opction.reset) {
+        state.search = opction.data
+      } else {
+        if (opction.data.inside) {
+          Array.prototype.push.apply(state.search.inside['0'].restaurant_with_foods, opction.data.inside['0'].restaurant_with_foods)
+          state.search = JSON.parse(JSON.stringify(state.search))
+        }
+      }
     }
   }
 })

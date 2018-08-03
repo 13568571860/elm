@@ -39,12 +39,9 @@ export default {
 <style lang="stylus" scoped>
   .footer
     border 1px solid #ccc
-    position absolute
     height 1.21rem
     padding-top .14rem
-    bottom 0
-    left 0
-    right 0
+    background #fff
     .el-col
       text-align center
       .iconfont

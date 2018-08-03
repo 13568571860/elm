@@ -75,7 +75,7 @@ export default {
       this.page = Math.ceil(this.shopping.length / 20)
     },
     getProduct (callback) {
-      this.axios.get(`/shopping/restaurants?extras[]=activities&geohash=ws10hpfzgd65&latitude=${this.address.latitude}&longitude=${this.address.longitude}&offset=${this.page * 20}&limit=20&terminal=web`).then(callback)
+      this.axios.get(`/shopping/restaurants?extras[]=activities&geohash=ws10hpfzgd65&latitude=${this.initAddress.latitude}&longitude=${this.initAddress.longitude}&offset=${this.page * 20}&limit=20&terminal=web`).then(callback)
     },
     handleJiazai () {
       this.getProduct(this.pushProduct)

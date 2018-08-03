@@ -17,5 +17,6 @@ export default {
   font-size: .37rem;
   line-height: 1.09rem;
   font-weight: 200;
+  height: 100%
 }
 </style>

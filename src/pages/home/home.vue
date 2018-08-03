@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <home-header></home-header>
+    <home-header class="header"></home-header>
     <div class="content" ref="scroll">
       <div>
         <home-nav></home-nav>
@@ -14,7 +14,7 @@
         <div v-else-if="show === 'no'" class="notMore">没有更多了</div>
       </div>
     </div>
-    <home-footer></home-footer>
+    <home-footer class="footer"></home-footer>
   </div>
 </template>
 
@@ -77,7 +77,12 @@ export default {
     }
   }
   .home
+    display flex
+    height 100%
+    flex-direction column
+    justify-content space-between
     .content
+      flex 1
       background-color $container
       overflow hidden
       position absolute

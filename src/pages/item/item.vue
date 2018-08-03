@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="boxContent">
     <item-header :item="headerItem"></item-header>
     <item-nav></item-nav>
     <div class="soperItem">

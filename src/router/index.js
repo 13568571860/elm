@@ -5,6 +5,7 @@ import City from 'pages/city/city'
 import Home from 'pages/home/home'
 import Login from 'pages/login/login'
 import Item from 'pages/item/item'
+import Search from 'pages/search/search'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/item/:shopId',
       name: 'item',
       component: Item
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search
     }
   ]
 })

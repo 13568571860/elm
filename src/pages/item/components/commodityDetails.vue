@@ -1,6 +1,6 @@
 <template>
   <transition>
-    <div class="commodity" v-show="show">
+    <div class="commodity" v-show="show" :class="{'transf': transf}">
       <commodity-header :opction="opction"></commodity-header>
       <div class="main">
         <div class="img">
@@ -46,14 +46,17 @@ export default {
         left: {
           icon: 'icon-jiantou4',
           handleClick: () => {
+            this.$store.commit('commodity', {})
             this.show = false
+            this.transf = false
           }
         },
         center: {
           text: this.commodity ? this.commodity.name : '数据获取中'
         }
       },
-      show: false
+      show: false,
+      transf: false
     }
   },
   computed: {
@@ -66,6 +69,9 @@ export default {
       if (this.commodity.specfoods) {
         this.opction.center.text = this.commodity.name
         this.show = true
+        window.setTimeout(() => {
+          this.transf = true
+        }, 0)
       }
     }
   }
@@ -78,18 +84,20 @@ export default {
     i
       font-size .33rem
   .v-enter-active, .v-leave-active
-    transform translate(0, 0)
+    left 0
     transition all .5s
   .v-enter, .v-leave-to
-    transform translate(100%, 0)
+    left 100%
     opacity 0
   .commodity
+    background #fff
+    height 100%
     z-index 998
     position absolute
-    overflow hidden
+    width 10rem
     background #fff
     top 0
-    left 0
+    left 100%
     right 0
     bottom 1.27rem
     .main
@@ -107,6 +115,7 @@ export default {
         font-size .37rem
         line-height .49rem
         color #666
+        padding-right .21rem
       .title
         font-size .44rem
         line-height .61rem
@@ -132,4 +141,6 @@ export default {
         line-height .43rem
         span
           margin-right .19rem
+  .transf
+    left 0
 </style>
