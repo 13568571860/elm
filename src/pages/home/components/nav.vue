@@ -8,8 +8,10 @@
           v-for="item in list"
           :key="item.id"
         >
-          <img :src="item.image_hash | img_home" alt="">
-          <p>{{item.name}}</p>
+          <router-link :to="'/list/' + item.name">
+            <img :src="item.image_hash | img_home" alt="">
+            <p>{{item.name}}</p>
+          </router-link>
         </el-col>
       </ul>
     </swiper-slide>

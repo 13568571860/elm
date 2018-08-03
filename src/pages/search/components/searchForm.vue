@@ -19,11 +19,6 @@ export default {
       search_text: ''
     }
   },
-  computed: {
-    offset () {
-      return this.$store.state.search.length
-    }
-  },
   methods: {
     searchSubmit () {
       this.$store.dispatch('search', {'search_text': this.search_text, offset: 0})

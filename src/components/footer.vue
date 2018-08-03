@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
-    <router-link :to="item.link" v-for="(item, idx) in data" :key="idx">
-      <el-col :span="6" class="active">
+    <router-link exact-active-class="active" :to="item.link" v-for="(item, idx) in data" :key="idx">
+      <el-col :span="6">
         <span class="iconfont" :class="item.icon"></span>
         <p>{{item.text}}</p>
       </el-col>

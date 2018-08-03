@@ -88,12 +88,13 @@ export default new Vuex.Store({
     search (state, opction) {
       if (opction.reset) {
         state.search = opction.data
+        return
+      } else if (opction.data.inside && opction.data.inside['0']) {
+        Array.prototype.push.apply(state.search.inside['0'].restaurant_with_foods, opction.data.inside['0'].restaurant_with_foods)
       } else {
-        if (opction.data.inside) {
-          Array.prototype.push.apply(state.search.inside['0'].restaurant_with_foods, opction.data.inside['0'].restaurant_with_foods)
-          state.search = JSON.parse(JSON.stringify(state.search))
-        }
+        Array.prototype.push.apply(state.search.inside['0'].restaurant_with_foods, [])
       }
+      state.search = JSON.parse(JSON.stringify(state.search))
     }
   }
 })

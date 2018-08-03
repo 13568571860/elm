@@ -2,7 +2,9 @@
   <div class="search">
     <search-header :opction="opction"></search-header>
     <search-form></search-form>
-    <search-content class="content"></search-content>
+    <div class="main">
+      <search-lists class="content" :list="list" @jiazai="jiazai"></search-lists>
+    </div>
     <search-footer></search-footer>
   </div>
 </template>
@@ -10,7 +12,7 @@
 <script>
 import SearchHeader from '@/components/header'
 import SearchForm from './components/searchForm'
-import SearchContent from './components/content'
+import SearchLists from '@/components/lists'
 import SearchFooter from '@/components/footer'
 export default {
   name: 'search',
@@ -18,7 +20,7 @@ export default {
     SearchHeader,
     SearchFooter,
     SearchForm,
-    SearchContent
+    SearchLists
   },
   data () {
     return {
@@ -32,7 +34,27 @@ export default {
         center: {
           text: '搜索'
         }
-      }
+      },
+      list: []
+    }
+  },
+  computed: {
+    search () {
+      return this.$store.state.search
+    }
+  },
+  watch: {
+    search () {
+      this.search_text = this.search.inside['0'].highlights[0]
+      this.list = this.search.inside['0'].restaurant_with_foods
+    }
+  },
+  methods: {
+    jiazai () {
+      this.$store.dispatch('search', {
+        'search_text': this.search_text,
+        offset: this.search.inside['0'].restaurant_with_foods.length
+      })
     }
   }
 }
@@ -45,6 +67,7 @@ export default {
     display flex
     flex-direction column
     justify-content space-between
-    .content
+    .main
       flex 1
+      position relative
 </style>
