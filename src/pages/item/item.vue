@@ -11,6 +11,7 @@
     <item-message-box></item-message-box>
     <item-car-item></item-car-item>
     <item-shade></item-shade>
+    <item-commodity-details></item-commodity-details>
   </div>
 </template>
 
@@ -23,6 +24,7 @@ import ItemCar from './components/car'
 import ItemMessageBox from './components/message'
 import ItemCarItem from './components/carItem'
 import ItemShade from './components/shade'
+import ItemCommodityDetails from './components/commodityDetails'
 export default {
   name: 'item',
   components: {
@@ -33,7 +35,8 @@ export default {
     ItemCar,
     ItemMessageBox,
     ItemCarItem,
-    ItemShade
+    ItemShade,
+    ItemCommodityDetails
   },
   data () {
     return {
@@ -52,6 +55,7 @@ export default {
     }
   },
   created () {
+    this.$store.commit('switchCon', true)
     let shopId = this.$router.currentRoute.params.shopId
     this.axios.get('/shopping/restaurant/' + shopId).then(this.getMerchant)
   }

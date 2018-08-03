@@ -138,6 +138,8 @@ export default {
         case e.target.classList.contains('nopays'):
           this.handleNoPays(item)
           break
+        default:
+          this.$store.commit('commodity', item)
       }
     },
     multiple (item) {

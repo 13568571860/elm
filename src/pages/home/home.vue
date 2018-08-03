@@ -14,6 +14,7 @@
         <div v-else-if="show === 'no'" class="notMore">没有更多了</div>
       </div>
     </div>
+    <home-footer></home-footer>
   </div>
 </template>
 
@@ -21,6 +22,7 @@
 import HomeHeader from './components/header'
 import HomeNav from './components/nav'
 import HomeNearby from './components/nearby'
+import HomeFooter from '@/components/footer'
 export default {
   name: 'home',
   data () {
@@ -31,7 +33,8 @@ export default {
   components: {
     HomeHeader,
     HomeNav,
-    HomeNearby
+    HomeNearby,
+    HomeFooter
   },
   methods: {
     load (isLoad) {
@@ -79,7 +82,7 @@ export default {
       overflow hidden
       position absolute
       top 1.29rem
-      bottom 0
+      bottom 1.21rem
       left 0
       right 0
       .icon-jiazai

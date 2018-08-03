@@ -36,7 +36,6 @@ export default {
         if (i % 8 === 0) this.nav.push([])
         this.nav[this.nav.length - 1].push(xhr.data[1].entries[i])
       }
-      console.log(this.nav)
     }
   },
   created () {

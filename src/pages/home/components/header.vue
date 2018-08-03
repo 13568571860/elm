@@ -1,7 +1,7 @@
 <template>
   <el-header height="auto" class="clearfix">
     <el-col :span="6">
-      <router-link to="1">
+      <router-link to="/search">
         <span class="iconfont icon-sousuo"></span>
       </router-link>
     </el-col>

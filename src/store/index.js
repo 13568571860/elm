@@ -14,7 +14,8 @@ export default new Vuex.Store({
     lock: false,
     restaurant: {},
     evalLoad: '',
-    switchCon: true
+    switchCon: true,
+    commodity: {}
   },
   actions: {
     searchCity (ctx, search) {
@@ -69,6 +70,9 @@ export default new Vuex.Store({
     },
     switchCon (state, switchCon) {
       state.switchCon = switchCon
+    },
+    commodity (state, commodity) {
+      state.commodity = commodity
     }
   }
 })

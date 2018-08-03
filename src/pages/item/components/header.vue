@@ -12,7 +12,7 @@
       </el-col>
       <el-col class="iconfont icon-jiantou" :span="1"></el-col>
     </div>
-    <div class="iconfont icon-jiantou4 back" @click="handleClick"></div>
+    <div class="iconfont icon-jiantou4 back" @click.stop="handleClick"></div>
   </div>
 </template>
 
