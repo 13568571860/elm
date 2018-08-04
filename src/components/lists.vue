@@ -90,7 +90,6 @@ export default {
         this.contentScroll.finishPullUp()
       }
       this.show = this.list.length > this.lists.length ? '' : 'no'
-      console.log(this.list, this.lists)
       this.lists = JSON.parse(JSON.stringify(this.list))
       this.contentScroll.refresh()
     }
@@ -112,7 +111,7 @@ export default {
       click: true
     })
     this.contentScroll.openPullUp({
-      threshold: 200
+      threshold: -50
     })
     this.onScroll()
   }
