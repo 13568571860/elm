@@ -107,7 +107,6 @@ export default new Vuex.Store({
       } else {
         Array.prototype.push.apply(state.search.inside['0'].restaurant_with_foods, [])
       }
-      console.log(state.search)
       state.search = JSON.parse(JSON.stringify(state.search))
     },
     allList (state, allList) {

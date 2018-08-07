@@ -111,7 +111,7 @@ export default {
       click: true
     })
     this.contentScroll.openPullUp({
-      threshold: -50
+      threshold: 200
     })
     this.onScroll()
   }
